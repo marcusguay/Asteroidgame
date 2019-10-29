@@ -1,7 +1,10 @@
-class Bullet extends GameObject {
+           class Bullet extends GameObject {
   int timer;
+  float lazerx;
+  float lazery;
   Bullet() {
-
+     timer=30;
+     size=10;
     location=new PVector(myShip.location.x, myShip.location.y);
     velocity=new PVector(myShip.direction.x, myShip.direction.y);
     velocity.setMag(15);
@@ -12,12 +15,13 @@ class Bullet extends GameObject {
   }
   void show() {
     fill(#6E89E8);
-    ellipse(location.x+25, location.y, 5, 5); 
-    ellipse(location.x-25, location.y, 5, 5);
+   // ellipse(location.x, location.y, size, size); 
+       ellipse(location.x, location.y, size, size); 
   }
 
   void act() {
     super.act();
+    
     timer--;
     if (timer==0) {
       lives=0;

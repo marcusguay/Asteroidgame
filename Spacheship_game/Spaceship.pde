@@ -2,10 +2,11 @@ class Ship extends GameObject {
   //1. Instance Variables
   
   PVector direction;
-
+  int bulletcd;
 
   //2. Constructor(s)
   Ship() {
+    size=75;
     lives=3;
     location= new PVector(width/2, height/2);
     velocity = new PVector(0, 0);
@@ -23,6 +24,7 @@ class Ship extends GameObject {
 
   void act() {
     super.act();
+
     location.add(velocity);
     if (wkey)
       velocity.add(direction);
@@ -34,7 +36,10 @@ class Ship extends GameObject {
 
     if (akey) direction.rotate (-radians(2));
     if (dkey) direction.rotate ( radians(2));
-
+bulletcd=bulletcd-1;
+if(bulletcd<=0){
     if (spacekey) mygameObjects.add(new Bullet());
+    bulletcd=10;
+}
   }
 }

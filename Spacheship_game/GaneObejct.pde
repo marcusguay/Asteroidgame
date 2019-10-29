@@ -1,5 +1,5 @@
 abstract class GameObject {
-
+  int timer;
   int lives;
   PVector location;
   PVector direction;
@@ -13,7 +13,7 @@ abstract class GameObject {
   }
 
   void act() {
-    println(location, velocity);
+
     location.add(velocity);
 
     if (location.y< -50) location.y=height+50;
