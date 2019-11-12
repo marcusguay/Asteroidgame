@@ -1,5 +1,6 @@
 class Asteroid extends GameObject {
  float fvelocity;
+
   Asteroid() {
     lives = 1;
     size = 100;
@@ -28,14 +29,19 @@ class Asteroid extends GameObject {
     super.act();
   fvelocity=( random(TWO_PI) );
     int i = 0;
+   
     while (i <mygameObjects.size()) {
       GameObject myObj = mygameObjects.get(i);
       if (myObj instanceof Bullet) {
         if (dist(myObj.location.x, myObj.location.y, location.x, location.y) < size/2 + myObj.size/2) {
           lives = 0;
+         
+          int j=0;
+          
+          while ( j < 10){
           mygameObjects.add(new Particle(location,fvelocity));
-         mygameObjects.add(new Particle(location,fvelocity));
-          mygameObjects.add(new Particle(location,fvelocity));
+          j=j+1;
+          }
           myObj.lives = 0;
           points=points+1;
 

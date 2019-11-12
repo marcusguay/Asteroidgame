@@ -16,6 +16,7 @@
   void show() {
     fill(#6E89E8);
    // ellipse(location.x, location.y, size, size); 
+   fill(#03A7FC);
        ellipse(location.x, location.y, size, size); 
   }
 

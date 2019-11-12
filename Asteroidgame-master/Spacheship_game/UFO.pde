@@ -15,7 +15,7 @@ class UFO extends GameObject {
   }
 
   public void show() {
-  text(ufocd,300,100);
+
     image(ufoimg, location.x, location.y);
   }
 

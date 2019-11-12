@@ -1,11 +1,15 @@
 boolean akey, dkey, skey, wkey, spacekey;
 PImage shipimg;
+PImage ship2img;
 PImage ufoimg;
 int mode; 
 float xx,yy;
+int lastpoints;
 int ufolives;
 float t;
+int highscore;
 int ITimer;
+int lasthighscore;
 float UX,UY;
 float URX,URY;
 boolean invincible;
@@ -17,6 +21,7 @@ int lives;
 int points;
 int modetimer;
 float UFOTIMER;
+float ax=width/2,ay=height/2;
 final int intro = 0;
 final int play =1;
 final int gameover=2;
@@ -28,15 +33,18 @@ Particle myPart;
 public void setup() {
 size(800, 600);
 ITimer=0;
+textSize(50);
   timer=30;
+
   float t=255;
     boolean invincible = false;
+      ship2img=loadImage("spaceshipcopy.png");
   shipimg=loadImage("spaceship.png");
     ufoimg=loadImage("ufo.png");
   imageMode(CENTER);
   mygameObjects= new ArrayList<GameObject>();
   myShip=new Ship();
-  ufolives=999999;
+  ufolives=10;
   myUFO=new UFO();
    myPart= new Particle();
   mygameObjects.add(myShip);
@@ -45,6 +53,7 @@ ITimer=0;
 
  
   shipimg.resize(75, 75);
+    ship2img.resize(75, 75);
   ufoimg.resize(75, 75);
 }
 

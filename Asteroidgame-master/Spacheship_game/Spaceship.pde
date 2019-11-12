@@ -1,6 +1,6 @@
 class Ship extends GameObject {
   //1. Instance Variables
-  
+ 
   PVector direction;
   int bulletcd;
 
@@ -23,7 +23,8 @@ class Ship extends GameObject {
           tint(t);
     translate(location.x, location.y);
     rotate(direction.heading());
-    image(shipimg, 0, 0);
+    if (wkey){    image(ship2img, 0, 0); } else {
+    image(shipimg, 0, 0);}
     popMatrix();
   }
 
