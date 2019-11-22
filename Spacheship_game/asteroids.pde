@@ -1,5 +1,6 @@
 class Asteroid extends GameObject {
  float fvelocity;
+
   Asteroid() {
     lives = 1;
     size = 100;
@@ -28,17 +29,28 @@ class Asteroid extends GameObject {
     super.act();
   fvelocity=( random(TWO_PI) );
     int i = 0;
+   
     while (i <mygameObjects.size()) {
       GameObject myObj = mygameObjects.get(i);
       if (myObj instanceof Bullet) {
         if (dist(myObj.location.x, myObj.location.y, location.x, location.y) < size/2 + myObj.size/2) {
           lives = 0;
-          mygameObjects.add(new Particle(location,fvelocity));
+         
+          int j=0;
+          
+          while ( j < 10 ){
+            fvelocity=(random(0,TWO_PI));
+          mygameObjects.add(new Particle(location.x,location.y,fvelocity));
+        explosion.play();
+        explosion.rewind();
+          j=j+1;
         
+          }
           myObj.lives = 0;
           points=points+1;
 
           if (size>25) {
+            mygameObjects.add(new Asteroid(size/2, location.x, location.y));
             mygameObjects.add(new Asteroid(size/2, location.x, location.y));
           }
         }
@@ -51,9 +63,13 @@ class Asteroid extends GameObject {
       GameObject myObj = mygameObjects.get(j);
       if (myObj instanceof Ship) {
         if (dist(myShip.location.x, myShip.location.y, location.x, location.y) < size/2 + myShip.size/2) {
-          text("oh on jah", 100, 100);
+            if(invincible==false){
+               explosion.play();
+        explosion.rewind();
+             ufolives=ufolives-1; ITimer=100; invincible=true;}
+         lives=0;
           //myObj.lives = 0;
-          lives=0;
+       
           if (size>25) {
             mygameObjects.add(new Asteroid(size/2, location.x, location.y));
           }

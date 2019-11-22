@@ -1,14 +1,21 @@
-class Particle extends GameObject {
+class Particle extends GameObject  {
+ float g=1;
+ float d;
+ int timer;
 
-  Particle() {
-  }
+  PVector location;
+  PVector direction;
+  PVector velocity;
+  int size;
+  
 
-  Particle(PVector incominglocation,float incomingfvelocity) {
-    location= incominglocation;
+  Particle(float incominglocationx,float incominglocationy,float incomingfvelocity) {
+    location = new PVector(incominglocationx,incominglocationy);
     velocity = new PVector(0, 1);
-    velocity.rotate( incomingfvelocity );
     velocity.setMag( random(0, 2) );
+    velocity.rotate( random(TWO_PI) );
     size=1;
+    lives=1;
     timer=100;
   }
 
@@ -18,10 +25,12 @@ class Particle extends GameObject {
    
   }
   void act() { 
-    super.act();
-
+   
+ 
+   location.add(velocity);
+ 
     timer=timer-1;
-    if (timer<=0) {
+    if (timer<0) {
       lives=0;
     }
   }

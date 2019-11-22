@@ -1,19 +1,43 @@
 void play(){
 background(0);
+xx=400;
+yy=300;
+ if(pcd < 0){
+   mygameObjects.add(new powerups(random(0,4))); 
+   pcd=500;
+   
+ }
+ pcd=pcd-1;
+ 
+ text(pcd,100,300);
+ 
+ stimer=stimer-1;
+ btimer=btimer-1;
+parttimer=parttimer-1;
+   tint(255);
+d=random(0,TWO_PI);
+if(ufolives<=0){
+  mode=gameover;}
 
- text("lives"+lives,100,100);
+if(invincible==true){
+ITimer=ITimer-1; }
+
+if(ITimer<=0){
+ invincible=false; 
+  
+}
+
+
+fill(255);
+ text("Lives" + ufolives,100,100);
  text("points"+points,100,200);
 timer=timer-1;  
-text(ufotimer,200,200);
-if(ufotimer>0){
-  ufotimer=ufotimer-1; }
-if (ufotimer<=0){
-mygameObjects.add(new UFO());
 
- ufocd=1000;
-}
+
+
+
   
-if (timer <=0){  timer=100;
+if (timer <=0){  timer=150;
   mygameObjects.add(new Asteroid());  }
 
   int i=0;

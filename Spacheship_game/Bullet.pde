@@ -3,7 +3,7 @@
   float lazerx;
   float lazery;
   Bullet() {
-     timer=30;
+     timer=50;
      size=10;
     location=new PVector(myShip.location.x, myShip.location.y);
     velocity=new PVector(myShip.direction.x, myShip.direction.y);
@@ -16,7 +16,9 @@
   void show() {
     fill(#6E89E8);
    // ellipse(location.x, location.y, size, size); 
+   fill(#03A7FC);
        ellipse(location.x, location.y, size, size); 
+      
   }
 
   void act() {

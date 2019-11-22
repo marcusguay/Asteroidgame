@@ -1,37 +1,62 @@
-class UFO extends GameObject{
+class UFO extends GameObject {
   float fvelocity;
-  
-  UFO(){
-    size=75;
-    size=75;
-  
 
+  UFO() {
+    size=75;
+    size=75;
+    ufocd=100;
+    ufotimer=100;
+    ufocd=200;
     lives=3;
-    location = new PVector(random(width), random(height));
-    velocity = new PVector(0,1);
-    velocity.setMag(1 );
-    velocity.rotate( random(TWO_PI) );
+    location = new PVector(UX,UY);
+    velocity = new PVector(100, 0);
+    velocity.setMag(4);
+  
   }
-  
-  public void show(){
- text(ufocd,200,300);
-   image(ufoimg, location.x, location.y);
+
+  public void show() {
+
+    image(ufoimg, location.x, location.y);
+  }
+
+  public void act() {
+    UFOTIMER=UFOTIMER-1;
+    
+    if (ufotimer<=0){
+      ufo.rewind();
+      ufocd=250;
+      ufotimer=1000;
     }
   
- public void act(){
- ufotimer=100;
+ if(ufocd>0 ){ 
+  ufo.play();
    ufocd=ufocd-1;
-   if(ufocd>=0){
-     super.act();
+     location.x=location.x+velocity.x;
+     location.y=location.y+velocity.y;
+     positionx=location.x;
+     positiony=location.y;
     
-    } else {
-       lives=0;
-     ufotimer=100; 
-      
+      if (UFOTIMER<=0) {
+        mygameObjects.add(new UFOBullet()); 
+         laser.play();
+ laser.rewind();
+        UFOTIMER=100;
+      }
+ }
+   
+   if(ufocd<=0){   
+     
+     location.x=-100;
+     location.y=300;
     }
   
-  
-}
-}
-     
+   if(ufotimer>-2 && ufocd<=0){
+    ufotimer=ufotimer-1; 
+
+   
     
+   
+
+    }
+  }
+}

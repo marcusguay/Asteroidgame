@@ -1,12 +1,44 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+AudioPlayer explosion2;
+AudioPlayer laser;
+AudioPlayer explosion;
+AudioPlayer ufo;
+Minim minim;
+int pcd;
+
+int btimer;
+ int stimer;
 boolean akey, dkey, skey, wkey, spacekey;
 PImage shipimg;
+PImage ship2img;
 PImage ufoimg;
 int mode; 
+float d;
+int parttimer=10;
+float xx, yy;
+int lastpoints;
+int ufolives;
+float t;
+int highscore;
+int ITimer;
+int lasthighscore;
+float UX, UY;
+float URX, URY;
+boolean invincible;
+float positionx;
+float positiony;
 int ufotimer;
 int ufocd;
 int lives;
 int points;
 int modetimer;
+float UFOTIMER;
+float ax=width/2, ay=height/2;
 final int intro = 0;
 final int play =1;
 final int gameover=2;
@@ -16,21 +48,33 @@ Ship myShip;
 UFO myUFO;
 Particle myPart;
 public void setup() {
-size(800, 600);
+  minim= new Minim(this);
+  explosion2=minim.loadFile("explosion2.wav");
+  laser=minim.loadFile("fire.wav");
+  explosion=minim.loadFile("bangLarge.wav");
+  ufo=minim.loadFile("saucerBig.wav"); 
+  size(800, 600);
+  ITimer=0;
+  textSize(50);
   timer=30;
-    
+
+  float t=255;
+  boolean invincible = false;
+  ship2img=loadImage("spaceshipcopy.png");
   shipimg=loadImage("spaceship.png");
-    ufoimg=loadImage("ufo.png");
+  ufoimg=loadImage("ufo.png");
   imageMode(CENTER);
   mygameObjects= new ArrayList<GameObject>();
   myShip=new Ship();
+  ufolives=10;
   myUFO=new UFO();
-   myPart= new Particle();
-  mygameObjects.add(myShip);
-  ufotimer=100;
 
- 
+  mygameObjects.add(myShip);
+  mygameObjects.add(new UFO());
+
+
   shipimg.resize(75, 75);
+  ship2img.resize(75, 75);
   ufoimg.resize(75, 75);
 }
 
@@ -67,6 +111,7 @@ public void keyReleased() {
 
 public void mouseReleased() {
   if (mode== intro) {
+    setup();
     mode=play;
   } else if (mode==gameover && modetimer<=0) {
     mode = intro;

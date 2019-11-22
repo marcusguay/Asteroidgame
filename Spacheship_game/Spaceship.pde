@@ -1,6 +1,6 @@
 class Ship extends GameObject {
   //1. Instance Variables
-  
+ 
   PVector direction;
   int bulletcd;
 
@@ -14,11 +14,19 @@ class Ship extends GameObject {
   }
   //3 Behaviour function
   void show() {
+    if(invincible==true){ t=255;
+    t=100;
+ } else { t=255;}
+      
+
     pushMatrix();
+          tint(t);
     translate(location.x, location.y);
     rotate(direction.heading());
-    image(shipimg, 0, 0);
+    if (wkey){    image(ship2img, 0, 0); } else {
+    image(shipimg, 0, 0);}
     popMatrix();
+    tint(255);
   }
 
 
@@ -38,8 +46,12 @@ class Ship extends GameObject {
     if (dkey) direction.rotate ( radians(2));
 bulletcd=bulletcd-1;
 if(bulletcd<=0){
-    if (spacekey) mygameObjects.add(new Bullet());
-    bulletcd=10;
+    if (spacekey){ mygameObjects.add(new Bullet());
+ laser.play();
+ laser.rewind();
+if( btimer>0){bulletcd=5;    } else {
+    bulletcd=10;}
 }
   }
+}
 }
